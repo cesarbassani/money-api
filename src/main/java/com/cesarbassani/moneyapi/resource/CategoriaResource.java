@@ -3,7 +3,6 @@ package com.cesarbassani.moneyapi.resource;
 import com.cesarbassani.moneyapi.model.Categoria;
 import com.cesarbassani.moneyapi.repository.CategoriaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -32,5 +31,10 @@ public class CategoriaResource {
         response.setHeader("Location", uri.toASCIIString());
 
         return ResponseEntity.created(uri).body(categoriaSalva);
+    }
+
+    @GetMapping("/{codigo}")
+    public Categoria buscarPeloCodigo(@PathVariable("codigo") Long codigo) {
+        return categoriaRepository.findOne(codigo);
     }
 }
